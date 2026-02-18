@@ -24,6 +24,3 @@ if not isinstance(self.oauth2_token, OAuth2Token) or self.oauth2_token.expired:
 
 This refreshes whenever the token is not a valid `OAuth2Token` (including `None` and dicts) or when it is expired. After refresh, `oauth2_token` is always an `OAuth2Token`, so the header is set correctly.
 
-## What's one realistic case / edge case your tests still don't cover?
-
-A token that is an `OAuth2Token` with `expires_at` in the past but very close to "now" (e.g. within the same second) could behave differently depending on when `expired` is evaluated vs when the request is sent. Clock skew or minor timing differences could lead to using a token that is technically expired. The tests use fixed timestamps and do not cover this race window.
